@@ -1,25 +1,30 @@
 import useFetch from "../../hooks/useFetch";
+import Loader from "../atoms/Loader";
+import ProductCard from "../molecules/ProductCard";
 
 const Products = () => {
   const { data, error, loading } = useFetch("public/products");
 
-  if (loading) return <h1>Cargando...</h1>;
-  if (error) return <h1>Error en la petición</h1>;
+  if (loading) return <Loader />;
+  if (error) return <div>{error?.message}</div>;
 
-  console.log(data);
+  const handleFilter = () => {};
 
   return (
-    <div>
-      <h1>Productos</h1>
-      <p>Explora todos nuestros productos</p>
-      {data.length === 0 ? (
-        <p>No existen productos</p>
-      ) : (
-        data.map((prod) => {
-          <div key={prod.id}>{JSON.stringify(prod)}</div>;
-        })
-      )}
-    </div>
+    <section className="py-16 max-w-256 m-auto">
+      <h1 className="text-3xl mb-6">Explora nuestros productos</h1>
+      <input
+        onChange={handleFilter}
+        type="text"
+        placeholder="Filtro de productos"
+        className="mb-4"
+      />
+      <div className="grid grid-cols-4 gap-6">
+        {data.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </section>
   );
 };
 
