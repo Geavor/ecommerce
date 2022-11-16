@@ -17,11 +17,11 @@ module.exports = {
   rules: {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    'prettier/prettier': [
-      'error',
+    "prettier/prettier": [
+      "error",
       {
-        'endOfLine': 'auto',
-      }
-    ]
+        endOfLine: "auto",
+      },
+    ],
   },
 };
