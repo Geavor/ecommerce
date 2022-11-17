@@ -7,6 +7,9 @@ import Login from "../components/pages/Login";
 import Register from "../components/pages/Register";
 import Form from "../components/pages/admin/products/Form";
 import Table from "../components/pages/admin/products/Table";
+import Admin from "../components/templates/Admin";
+import Product from "../components/pages/Product";
+import Cart from "../components/pages/Cart";
 
 const Router = createBrowserRouter([
   {
@@ -22,6 +25,14 @@ const Router = createBrowserRouter([
         path: "/productos",
         element: <Products />,
       },
+      {
+        path: "/productos/:id",
+        element: <Product />,
+      },
+      {
+        path: "/carrito",
+        element: <Cart />,
+      },
     ],
   },
   {
@@ -33,12 +44,22 @@ const Router = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: "/admin/productos",
-    element: <Table />,
-  },
-  {
-    path: "/admin/productos/crear",
-    element: <Form />,
+    path: "/admin",
+    element: <Admin />,
+    children: [
+      {
+        path: "/admin/productos",
+        element: <Table />,
+      },
+      {
+        path: "/admin/productos/crear",
+        element: <Form />,
+      },
+      {
+        path: "/admin/productos/editar/:id",
+        element: <Form />,
+      },
+    ],
   },
 ]);
 
