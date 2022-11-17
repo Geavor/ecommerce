@@ -5,6 +5,7 @@ import { API_URL } from "../../constants/env";
 import { CartContext } from "../../context/CartContext";
 import { token } from "../../helpers/auth";
 import SummaryItem from "../atoms/SummaryItem.jsx";
+import PaypalPayment from "../organisms/PaypalPayment";
 
 function Cart() {
   const { state } = useContext(CartContext);
@@ -26,8 +27,6 @@ function Cart() {
       products,
     };
 
-    console.log(data);
-
     axios
       .post(`${API_URL}/private/purchase-orders`, data, {
         headers: {
@@ -35,9 +34,7 @@ function Cart() {
         },
       })
       .then((resp) => {
-        alert("Orden creada");
         setOrder(resp.data.data);
-        //console.log(resp);
       })
       .catch((e) => console.log(e));
   };
@@ -60,7 +57,10 @@ function Cart() {
                   CREAR ORDEN
                 </button>
               ) : (
-                <p>ID de la orden de compra: {order.id}</p>
+                <>
+                  <p>ID de la orden de compra: {order.id}</p>
+                  <PaypalPayment value={value} order={order} />
+                </>
               )}
             </div>
           ) : (
