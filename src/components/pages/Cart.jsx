@@ -1,13 +1,46 @@
-import { useContext } from "react";
+import axios from "axios";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../../constants/env";
 import { CartContext } from "../../context/CartContext";
+import { token } from "../../helpers/auth";
 import SummaryItem from "../atoms/SummaryItem.jsx";
 
 function Cart() {
   const { state } = useContext(CartContext);
+  const [order, setOrder] = useState();
 
   let value = 0;
   state.cart.forEach((c) => (value += c.price));
+
+  const handleOrder = () => {
+    const products = state.cart.map((p) => {
+      return {
+        product_id: p.id,
+        amount: 1,
+        unit_price: p.price,
+      };
+    });
+
+    const data = {
+      products,
+    };
+
+    console.log(data);
+
+    axios
+      .post(`${API_URL}/private/purchase-orders`, data, {
+        headers: {
+          Authorization: `Bearer ${token()}`,
+        },
+      })
+      .then((resp) => {
+        alert("Orden creada");
+        setOrder(resp.data.data);
+        //console.log(resp);
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <div className="max-w-256 m-auto">
@@ -21,6 +54,14 @@ function Cart() {
                   <SummaryItem key={prod.id} product={prod} />
                 ))}
               </div>
+
+              {!order ? (
+                <button className="bg-gradient" onClick={handleOrder}>
+                  CREAR ORDEN
+                </button>
+              ) : (
+                <p>ID de la orden de compra: {order.id}</p>
+              )}
             </div>
           ) : (
             <>
