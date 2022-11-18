@@ -1,5 +1,4 @@
 import Logo from "../molecules/header/Logo";
-import MainMenu from "../molecules/header/MainMenu";
 
 const MainHeader = ({ children }) => {
   return (

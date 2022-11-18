@@ -1,9 +1,13 @@
+import Banner from "../organisms/Banner";
+import MainProducts from "../organisms/MainProducts";
+
 function Home() {
   return (
     <>
+      <Banner />
       <div>
-        <h1>Bienvenido... </h1>
-        <p></p>
+        <h2 className="mt-8 text-2xl">Últimos productos</h2>
+        <MainProducts />
       </div>
     </>
   );
