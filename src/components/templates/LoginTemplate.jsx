@@ -11,7 +11,7 @@ const LoginTemplate = ({ children, title }) => {
                     <div className="text-center">
                       <img
                         className="mx-auto w-48 mb-4 pt-4"
-                        src="https://ed.team/images/logo/logo.svg"
+                        src="/eCommerce_Color.svg"
                         alt="logo"
                       />
                       <h4 className="text-xl font-semibold mt-1 mb-8 pb-1">
@@ -24,9 +24,9 @@ const LoginTemplate = ({ children, title }) => {
                 <div className="bg-gradient lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none">
                   <div className="text-white px-2 mx-6 my-16 md:px-12 md:mx-6">
                     <span className="text-xl font-semibold mb-6">
-                      Más que un e-commerce...
+                      Un eCommerce diferente...
                     </span>
-                    <h4 className="text-4xl">somos una tienda en línea</h4>
+                    <h4 className="text-4xl">Con buenos precios y garantías</h4>
                   </div>
                 </div>
               </div>
